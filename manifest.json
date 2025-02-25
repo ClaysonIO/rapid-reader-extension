@@ -3,7 +3,7 @@
   "name": "Rapid Reader",
   "version": "1.0",
   "description": "Implements the RSVP (Rapid Serial Visual Presentation) method for selected text",
-  "permissions": ["activeTab", "scripting", "contextMenus"],
+  "permissions": ["activeTab", "scripting", "contextMenus", "storage"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {

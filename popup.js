@@ -36,6 +36,15 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('mousemove', handleProgressDrag);
   document.addEventListener('mouseup', handleProgressDragEnd);
   
+  // Load saved WPM from storage
+  chrome.storage.sync.get(['savedWpm'], (result) => {
+    if (result.savedWpm) {
+      wpm = result.savedWpm;
+      wpmSlider.value = wpm;
+      wpmValue.textContent = wpm;
+    }
+  });
+  
   // Get selected text from the active tab
   getSelectedText();
 });
@@ -182,6 +191,9 @@ function resetReading() {
 function updateWpm() {
   wpm = parseInt(wpmSlider.value);
   wpmValue.textContent = wpm;
+  
+  // Save the WPM to chrome storage
+  chrome.storage.sync.set({savedWpm: wpm});
   
   // Update reading time estimate with new WPM
   updateWordCountAndTime();
