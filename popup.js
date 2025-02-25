@@ -4,6 +4,7 @@ let currentIndex = 0;
 let intervalId = null;
 let wpm = 300;
 let isPlaying = false;
+let currentTheme = 'light'; // Default theme
 
 // DOM elements
 const startBtn = document.getElementById('start-btn');
@@ -18,6 +19,7 @@ const progressContainer = document.querySelector('.progress');
 const beforeSpan = document.querySelector('.before');
 const highlightSpan = document.querySelector('.highlight');
 const afterSpan = document.querySelector('.after');
+const themeSelect = document.getElementById('theme-select');
 
 // Variables for drag functionality
 let isDragging = false;
@@ -29,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   pauseBtn.addEventListener('click', pauseReading);
   resetBtn.addEventListener('click', resetReading);
   wpmSlider.addEventListener('input', updateWpm);
+  themeSelect.addEventListener('change', updateTheme);
   
   // Add progress bar interaction events
   progressContainer.addEventListener('click', handleProgressClick);
@@ -36,18 +39,63 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('mousemove', handleProgressDrag);
   document.addEventListener('mouseup', handleProgressDragEnd);
   
-  // Load saved WPM from storage
-  chrome.storage.sync.get(['savedWpm'], (result) => {
+  // Load saved settings from storage
+  chrome.storage.sync.get(['savedWpm', 'theme'], (result) => {
+    // Load WPM
     if (result.savedWpm) {
       wpm = result.savedWpm;
       wpmSlider.value = wpm;
       wpmValue.textContent = wpm;
+    }
+    
+    // Load theme
+    if (result.theme) {
+      currentTheme = result.theme;
+      themeSelect.value = currentTheme;
+      applyTheme(currentTheme);
+    } else {
+      // Default to system theme if not set
+      themeSelect.value = 'system';
+      applyTheme('system');
     }
   });
   
   // Get selected text from the active tab
   getSelectedText();
 });
+
+// Apply the selected theme
+function applyTheme(theme) {
+  currentTheme = theme;
+  
+  if (theme === 'system') {
+    // Check system preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+    
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (currentTheme === 'system') {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+      }
+    });
+  } else {
+    // Apply specific theme
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+  
+  // Save theme preference
+  chrome.storage.sync.set({theme: theme});
+}
+
+// Update theme when selection changes
+function updateTheme() {
+  const selectedTheme = themeSelect.value;
+  applyTheme(selectedTheme);
+}
 
 // Get the selected text from the active tab
 function getSelectedText() {

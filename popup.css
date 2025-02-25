@@ -1,9 +1,63 @@
+:root {
+  /* Light theme variables (default) */
+  --bg-color: #f8f9fa;
+  --text-color: #333;
+  --container-bg: #fff;
+  --container-shadow: rgba(0, 0, 0, 0.1);
+  --border-color: #e0e0e0;
+  --rsvp-display-bg: #fafafa;
+  --highlight-color: #e74c3c;
+  --center-line-color: rgba(0, 0, 0, 0.1);
+  --button-text: white;
+  --start-btn-bg: #2ecc71;
+  --start-btn-hover: #27ae60;
+  --pause-btn-bg: #3498db;
+  --pause-btn-hover: #2980b9;
+  --disabled-btn-bg: #95a5a6;
+  --reset-btn-bg: #e74c3c;
+  --reset-btn-hover: #c0392b;
+  --status-text: #555;
+  --progress-bg: #ecf0f1;
+  --progress-bar-bg: #3498db;
+  --word-count-color: #7f8c8d;
+  --footer-text: #7f8c8d;
+  --link-color: #3498db;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg-color: #1a1a1a;
+  --text-color: #f0f0f0;
+  --container-bg: #2d2d2d;
+  --container-shadow: rgba(0, 0, 0, 0.3);
+  --border-color: #444;
+  --rsvp-display-bg: #333;
+  --highlight-color: #ff6b6b;
+  --center-line-color: rgba(255, 255, 255, 0.1);
+  --button-text: white;
+  --start-btn-bg: #2ecc71;
+  --start-btn-hover: #27ae60;
+  --pause-btn-bg: #3498db;
+  --pause-btn-hover: #2980b9;
+  --disabled-btn-bg: #555;
+  --reset-btn-bg: #e74c3c;
+  --reset-btn-hover: #c0392b;
+  --status-text: #ccc;
+  --progress-bg: #444;
+  --progress-bar-bg: #3498db;
+  --word-count-color: #aaa;
+  --footer-text: #aaa;
+  --link-color: #5dade2;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 350px;
   margin: 0;
   padding: 15px;
-  background-color: #f8f9fa;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -16,13 +70,13 @@ h1 {
   font-size: 18px;
   text-align: center;
   margin: 0 0 10px 0;
-  color: #333;
+  color: var(--text-color);
 }
 
 .rsvp-container {
-  background-color: #fff;
+  background-color: var(--container-bg);
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px var(--container-shadow);
   padding: 20px;
   margin-bottom: 10px;
 }
@@ -32,9 +86,9 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
-  background-color: #fafafa;
+  background-color: var(--rsvp-display-bg);
   position: relative;
 }
 
@@ -49,7 +103,7 @@ h1 {
 }
 
 .highlight {
-  color: #e74c3c;
+  color: var(--highlight-color);
   font-weight: bold;
   position: relative;
 }
@@ -62,7 +116,7 @@ h1 {
   bottom: 0;
   left: 50%;
   width: 1px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--center-line-color);
   z-index: 1;
 }
 
@@ -78,9 +132,9 @@ h1 {
 }
 
 .controls {
-  background-color: #fff;
+  background-color: var(--container-bg);
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px var(--container-shadow);
   padding: 15px;
 }
 
@@ -123,53 +177,53 @@ button {
 }
 
 #start-btn {
-  background-color: #2ecc71;
-  color: white;
+  background-color: var(--start-btn-bg);
+  color: var(--button-text);
 }
 
 #start-btn:hover {
-  background-color: #27ae60;
+  background-color: var(--start-btn-hover);
 }
 
 #pause-btn {
-  background-color: #3498db;
-  color: white;
+  background-color: var(--pause-btn-bg);
+  color: var(--button-text);
 }
 
 #pause-btn:hover {
-  background-color: #2980b9;
+  background-color: var(--pause-btn-hover);
 }
 
 #pause-btn:disabled {
-  background-color: #95a5a6;
+  background-color: var(--disabled-btn-bg);
   cursor: not-allowed;
 }
 
 #reset-btn {
-  background-color: #e74c3c;
-  color: white;
+  background-color: var(--reset-btn-bg);
+  color: var(--button-text);
 }
 
 #reset-btn:hover {
-  background-color: #c0392b;
+  background-color: var(--reset-btn-hover);
 }
 
 .text-info {
-  background-color: #fff;
+  background-color: var(--container-bg);
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px var(--container-shadow);
   padding: 15px;
 }
 
 #status-message {
   font-size: 14px;
   margin: 0 0 10px 0;
-  color: #555;
+  color: var(--status-text);
 }
 
 .progress {
   height: 8px;
-  background-color: #ecf0f1;
+  background-color: var(--progress-bg);
   border-radius: 4px;
   margin-bottom: 10px;
   overflow: hidden;
@@ -178,7 +232,7 @@ button {
 
 .progress-bar {
   height: 100%;
-  background-color: #3498db;
+  background-color: var(--progress-bar-bg);
   width: 0%;
   transition: width 0.3s ease;
 }
@@ -187,18 +241,42 @@ button {
   font-size: 14px;
   margin: 0;
   text-align: right;
-  color: #7f8c8d;
+  color: var(--word-count-color);
+}
+
+.theme-selector {
+  background-color: var(--container-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px var(--container-shadow);
+  padding: 15px;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-selector label {
+  font-size: 14px;
+}
+
+.theme-selector select {
+  flex-grow: 1;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background-color: var(--rsvp-display-bg);
+  color: var(--text-color);
 }
 
 .footer {
   margin-top: 15px;
   text-align: center;
   font-size: 12px;
-  color: #7f8c8d;
+  color: var(--footer-text);
 }
 
 .footer a {
-  color: #3498db;
+  color: var(--link-color);
   text-decoration: none;
 }
 
