@@ -14,7 +14,9 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": [
+        "<all_urls>"
+      ],
       "js": ["content.js"]
     }
   ],
@@ -29,7 +31,7 @@
   "web_accessible_resources": [
     {
       "resources": ["privacy_policy.html"],
-      "matches": ["<all_urls>"]
+      "matches": ["https://github.com/*"]
     }
   ]
 }
