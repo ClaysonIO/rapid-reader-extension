@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generate Rapid Reader Icons</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .canvas-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .icon-set {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    h1, h2 {
+      color: #3498db;
+    }
+    .instructions {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    ol {
+      padding-left: 20px;
+    }
+    canvas {
+      border: 1px solid #ddd;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rapid Reader Icon Generator</h1>
+  
+  <div class="instructions">
+    <h2>Instructions:</h2>
+    <ol>
+      <li>Right-click on each canvas below and select "Save image as..."</li>
+      <li>Save each icon with the appropriate filename (shown below each canvas)</li>
+      <li>Save the icons to the "images" folder in your extension directory</li>
+    </ol>
+  </div>
+  
+  <div class="icon-set">
+    <h2>Extension Icons</h2>
+    <div class="canvas-container">
+      <div>
+        <canvas id="icon16" width="16" height="16"></canvas>
+        <p>Save as: icon16.png</p>
+      </div>
+      <div>
+        <canvas id="icon48" width="48" height="48"></canvas>
+        <p>Save as: icon48.png</p>
+      </div>
+      <div>
+        <canvas id="icon128" width="128" height="128"></canvas>
+        <p>Save as: icon128.png</p>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Function to draw the RSVP icon at different sizes
+    function drawRSVPIcon(canvas, size) {
+      const ctx = canvas.getContext('2d');
+      const center = size / 2;
+      const radius = size * 0.45;
+      
+      // Background circle
+      ctx.fillStyle = '#3498db';
+      ctx.beginPath();
+      ctx.arc(center, center, radius, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Text lines (simplified for small icons)
+      const lineHeight = size * 0.03;
+      const lineWidth = size * 0.6;
+      const lineY1 = center - size * 0.15;
+      const lineY2 = center;
+      const lineY3 = center + size * 0.15;
+      const lineX = center - lineWidth / 2;
+      
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+      
+      // Only draw text lines for icons larger than 16px
+      if (size > 16) {
+        ctx.fillRect(lineX, lineY1, lineWidth, lineHeight);
+        ctx.fillRect(lineX, lineY3, lineWidth, lineHeight);
+      }
+      
+      // Highlighted word area
+      const wordWidth = size * 0.3;
+      const wordHeight = size * 0.15;
+      const wordX = center - wordWidth / 2;
+      const wordY = center - wordHeight / 2;
+      
+      ctx.fillStyle = '#ffffff';
+      if (size > 16) {
+        // Rounded rectangle for larger icons
+        const radius = size * 0.03;
+        ctx.beginPath();
+        ctx.moveTo(wordX + radius, wordY);
+        ctx.lineTo(wordX + wordWidth - radius, wordY);
+        ctx.quadraticCurveTo(wordX + wordWidth, wordY, wordX + wordWidth, wordY + radius);
+        ctx.lineTo(wordX + wordWidth, wordY + wordHeight - radius);
+        ctx.quadraticCurveTo(wordX + wordWidth, wordY + wordHeight, wordX + wordWidth - radius, wordY + wordHeight);
+        ctx.lineTo(wordX + radius, wordY + wordHeight);
+        ctx.quadraticCurveTo(wordX, wordY + wordHeight, wordX, wordY + wordHeight - radius);
+        ctx.lineTo(wordX, wordY + radius);
+        ctx.quadraticCurveTo(wordX, wordY, wordX + radius, wordY);
+        ctx.fill();
+      } else {
+        // Simple rectangle for 16px icon
+        ctx.fillRect(wordX, wordY, wordWidth, wordHeight);
+      }
+      
+      // Red ORP (Optimal Recognition Point)
+      const orpRadius = size * 0.03;
+      ctx.fillStyle = '#e74c3c';
+      ctx.beginPath();
+      ctx.arc(center, center, Math.max(orpRadius, 1), 0, Math.PI * 2);
+      ctx.fill();
+    }
+    
+    // Draw icons when the page loads
+    window.onload = function() {
+      drawRSVPIcon(document.getElementById('icon16'), 16);
+      drawRSVPIcon(document.getElementById('icon48'), 48);
+      drawRSVPIcon(document.getElementById('icon128'), 128);
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rapid Reader</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Rapid Reader</h1>
+    
+    <div class="rsvp-container">
+      <div class="rsvp-display">
+        <div class="rsvp-word">
+          <span class="before"></span><span class="highlight">•</span><span class="after"></span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="controls">
+      <div class="speed-control">
+        <label for="wpm">Speed (WPM):</label>
+        <input type="range" id="wpm" min="100" max="800" step="25" value="300">
+        <span id="wpm-value">300</span>
+      </div>
+      
+      <div class="buttons">
+        <button id="start-btn">Start</button>
+        <button id="pause-btn" disabled>Pause</button>
+        <button id="reset-btn">Reset</button>
+      </div>
+    </div>
+    
+    <div class="text-info">
+      <p id="status-message">Select text on any webpage and click the extension icon to speed read it.</p>
+      <div class="progress">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <p id="word-count">Words: 0</p>
+    </div>
+    
+    <div class="footer">
+      <p><a href="privacy_policy.html" target="_blank">Privacy Policy</a> | <a href="https://github.com/yourusername/rapid-reader" target="_blank">Open Source</a></p>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

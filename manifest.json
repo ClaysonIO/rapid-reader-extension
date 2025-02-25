@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Rapid Reader",
+  "version": "1.0",
+  "description": "Implements the RSVP (Rapid Serial Visual Presentation) method for selected text",
+  "permissions": ["activeTab", "scripting", "contextMenus"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["privacy_policy.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
