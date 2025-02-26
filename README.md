@@ -13,14 +13,10 @@ A Chrome extension that implements the RSVP (Rapid Serial Visual Presentation) s
 
 ## Installation
 
-### Generate Icons
+### Prerequesites
 
-Before installing the extension, you need to generate the icon files:
-
-1. Open the `generate_icons.html` file in Chrome
-2. Right-click on each canvas and select "Save image as..."
-3. Save each icon with the appropriate filename (icon16.png, icon48.png, icon128.png)
-4. Save the icons to the `images` folder in the extension directory
+1. Clone the repository to your machine.
+2. Have a Chromium-based browser installed
 
 ### Load the Extension in Chrome
 
@@ -41,6 +37,8 @@ Before installing the extension, you need to generate the icon files:
 
 You can also right-click on selected text and choose "Speed Read with RSVP" from the context menu.
 
+If you click the extension icon without any text selected, it will attempt to select the main text of the current page.
+
 ## How It Works
 
 The RSVP technique works by:
@@ -55,6 +53,7 @@ This extension requires the following permissions:
 
 - `activeTab`: To access the current tab's content
 - `scripting`: To execute scripts in the active tab
+- `storage`: To store settings
 - `contextMenus`: To add a context menu item for selected text
 
 ## Development
@@ -64,6 +63,8 @@ This extension is built using:
 - Manifest V3 for Chrome Extensions
 - HTML, CSS, and JavaScript
 - Chrome Extension APIs
+
+This tool was primarily generated using Claude Sonnet v3.7, via Cline.
 
 ## License
 
