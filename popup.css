@@ -6,7 +6,7 @@
   --container-shadow: rgba(0, 0, 0, 0.1);
   --border-color: #e0e0e0;
   --rsvp-display-bg: #fafafa;
-  --highlight-color: #e74c3c;
+  --highlight-color: #3498db; /* Changed from red (#e74c3c) to blue (#3498db) */
   --center-line-color: rgba(0, 0, 0, 0.1);
   --button-text: white;
   --start-btn-bg: #2ecc71;
@@ -32,7 +32,7 @@
   --container-shadow: rgba(0, 0, 0, 0.3);
   --border-color: #444;
   --rsvp-display-bg: #333;
-  --highlight-color: #ff6b6b;
+  --highlight-color: #5dade2; /* Changed from red (#ff6b6b) to blue (#5dade2) */
   --center-line-color: rgba(255, 255, 255, 0.1);
   --button-text: white;
   --start-btn-bg: #2ecc71;
@@ -108,16 +108,27 @@ h1 {
   position: relative;
 }
 
-/* Add a vertical line to mark the center */
-.rsvp-display::after {
+/* Add triangles at top and bottom pointing to the center */
+.rsvp-display::before, .rsvp-display::after {
   content: '';
   position: absolute;
-  top: 0;
-  bottom: 0;
   left: 50%;
-  width: 1px;
-  background-color: var(--center-line-color);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  transform: translateX(-50%);
   z-index: 1;
+}
+
+.rsvp-display::before {
+  top: 0;
+  border-top: 8px solid var(--center-line-color);
+}
+
+.rsvp-display::after {
+  bottom: 0;
+  border-bottom: 8px solid var(--center-line-color);
 }
 
 /* Position the spans to keep the red letter centered */

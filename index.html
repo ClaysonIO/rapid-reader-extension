@@ -307,21 +307,32 @@
     }
     
     .highlight {
-      color: var(--accent-color);
+      color: var(--primary-color); /* Changed from accent-color (red) to primary-color (blue) */
       font-weight: bold;
       position: relative;
     }
     
-    /* Add a vertical line to mark the center */
-    .rsvp-display::after {
+    /* Add triangles at top and bottom pointing to the center */
+    .rsvp-display::before, .rsvp-display::after {
       content: '';
       position: absolute;
-      top: 0;
-      bottom: 0;
       left: 50%;
-      width: 1px;
-      background-color: rgba(0, 0, 0, 0.1);
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      transform: translateX(-50%);
       z-index: 1;
+    }
+    
+    .rsvp-display::before {
+      top: 0;
+      border-top: 10px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .rsvp-display::after {
+      bottom: 0;
+      border-bottom: 10px solid rgba(0, 0, 0, 0.1);
     }
     
     /* Position the spans to keep the red letter centered */
