@@ -739,8 +739,9 @@
       currentIndex = 0;
       progressBar.style.width = '0%';
 
-      // Remove footnote numbers: digits that immediately follow a non-whitespace character
-      const cleanText = text.replace(/(?<=\S)\d+/g, '');
+      // Remove footnote numbers (digits that immediately follow a non-whitespace character)
+      // and surround en-dashes and em-dashes with whitespaces for ease of understanding
+      const cleanText = text.replace(/[\u2013\u2014]/g, ' $& ').replace(/(?<=\S)\d+/g, '');
       
       // Split text into words and filter out empty strings
       words = cleanText.split(/\s+/).filter(word => word.length > 0);
