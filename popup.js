@@ -266,7 +266,7 @@ function getSelectedText() {
 function processText(text) {
   // Remove footnote numbers (digits that immediately follow a non-whitespace character)
   // and surround en-dashes and em-dashes with whitespaces for ease of understanding
-  const cleanText = text.replace(/[\u2013\u2014]/g, ' $& ').replace(/(?<=\S)\d+/g, '');
+  const cleanText = text.replace(/[\u2013\u2014]/g, ' $& ').replace(/(?<=[^\d\s])\d+/g, '');
 
   // Split text into words and filter out empty strings
   words = cleanText.split(/\s+/).filter(word => word.length > 0);
