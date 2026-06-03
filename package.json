@@ -1,0 +1,6 @@
+{
+  "name": "rapid-reader-extension",
+  "scripts": {
+    "test": "node --test test.js"
+  }
+}
